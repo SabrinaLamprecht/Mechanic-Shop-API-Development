@@ -1,6 +1,6 @@
-Mechanic Shop API Development
+Mechanic Shop API Project
 
-This project is a RESTful API built using Flask, SQLAlchemy, and Marshmallow. It is designed to manage a mechanic shop system with Customers, Mechanics, and Service Tickets.
+This project is a API built using Flask, SQLAlchemy, Marshmallow, Flask-Limiter, and Flask-Caching. This project simulates a backend system for a mechanic shop. It manages four main resources: customers, mechanics, service tickets, and inventory.
 
 It features:
 --- CRUD operatins

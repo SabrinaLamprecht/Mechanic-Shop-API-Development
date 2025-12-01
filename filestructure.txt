@@ -1,12 +1,22 @@
 /project
 ├── /application
-│   ├── __init__.py - create_app() lives here
+│   ├── __init__.py # create_app() lives here
 │   ├── extensions.py
 │   ├── /blueprints
-│		│		├──/user
-│		│				├──__init__.py  - Initializt User Blueprint
-│		│				├── routes.py  - Create User Controllers/routes
-│		│				└── userSchemas.py
+│	│	├──/customers
+│	│		├──__init__.py  # Initializes the Blueprint
+│	│		├── routes.py  # Create controllers/routes
+│	│		└── schemas.py
+│	│   ├──/mechanics
+│	│		├──__init__.py 
+│	│		├── routes.py  
+│	│		└── schemas.py
+│	│   ├──/service_tickets
+│	│		├──__init__.py 
+│	│		├── routes.py  
+│	│		└── schemas.py
+│   ├── /utils 
+│	│		└── util.py # File for token functions
 │   └── models.py
 ├── app.py
 └── config.py
