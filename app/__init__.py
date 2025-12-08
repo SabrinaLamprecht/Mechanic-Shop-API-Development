@@ -11,6 +11,7 @@ from .blueprints.service_tickets import service_tickets_bp
 from .blueprints.inventory import inventory_bp
 import config
 from flask_swagger_ui import get_swaggerui_blueprint
+from .routes.init_db import init_bp
 
 SWAGGER_URL = '/api/docs'  # URL for exposing Swagger UI - to view the documentation
 API_URL = '/static/swagger.yaml'  # Our API URL - grab our hosts the host URL from the swagger.yaml file
@@ -48,6 +49,7 @@ def create_app(config_name='DevelopmentConfig'):
     app.register_blueprint(mechanics_bp, url_prefix='/mechanics')
     app.register_blueprint(service_tickets_bp, url_prefix='/service_tickets')
     app.register_blueprint(inventory_bp, url_prefix='/inventory')
-    app.register_blueprint(swaggerui_blueprint, url_prefix=SWAGGER_URL) # Registering our swagger blueprint
+    app.register_blueprint(swaggerui_blueprint, url_prefix=SWAGGER_URL)
+    app.register_blueprint(init_bp)
     
     return app
