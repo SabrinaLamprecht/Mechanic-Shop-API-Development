@@ -6,6 +6,7 @@ from functools import wraps
 from flask import request, jsonify
 import os
 
+SECRET_KEY = os.environ.get('SECRET_KEY') or "super secret secrets"
 
 # encode_token function that takes in a mechanic_id or customer_id to create a token specific to that user
 def encode_token(user_id, user_type):

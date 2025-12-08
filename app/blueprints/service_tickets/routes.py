@@ -144,7 +144,7 @@ def add_part(service_ticket_id):
     if not part:
         return jsonify({"message": f"Part ID {part_id} not found."}), 404
     
-     # Check if part already exists in this ticket
+    # Check if part already exists in this ticket
     existing_link = db.session.scalar(
         select(ServiceTicketInventory).where(
             ServiceTicketInventory.service_ticket_id == service_ticket_id,

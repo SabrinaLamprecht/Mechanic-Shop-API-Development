@@ -22,11 +22,6 @@ class TestingConfig:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 class ProductionConfig:
-    DEBUG = False
-    SECRET_KEY = os.getenv('SECRET_KEY', 'fallback-secret')
-    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', 'sqlite:///fallback_prod.db')
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SQLALCHEMY_DATABASE_URI = os.environ.get('SQLALCHEMY_DATABASE_URI')
+    CACHE_TYPE = "SimpleCache"
 
-# TEMP DEBUG
-print("DEBUG: DATABASE_URL =", os.getenv('DATABASE_URL'))
-print("DEBUG: SECRET_KEY =", os.getenv('SECRET_KEY'))
