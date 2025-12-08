@@ -27,6 +27,7 @@ packaging==25.0
 psycopg2==2.9.11
 pyasn1==0.6.1
 Pygments==2.19.2
+python-dotenv==1.2.1
 python-jose==3.5.0
 PyYAML==6.0.3
 rich==14.2.0
