@@ -126,7 +126,7 @@ def search_by_email():
     email = request.args.get("email")
     
     query = select(Customer).where(Customer.email.like(f'%{email}%'))
-    customer = db.session.execute(query).scalars().first()
+    customer = db.session.execute(query).scalars().all()
     
-    return customer_schema.jsonify(customer)
+    return customers_schema.jsonify(customer)
     

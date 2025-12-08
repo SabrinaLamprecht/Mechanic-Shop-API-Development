@@ -83,7 +83,7 @@ def get_service_ticket(service_ticket_id):
     
     if service_ticket:       
         return service_ticket_schema.jsonify(service_ticket), 200
-    return jsonify({'error': "Invalid service ticket ID."})
+    return jsonify({'error': "Invalid service ticket ID."}), 404
 
 # Update a service ticket by adding or removing mechanic(s) ⚡ Tested!
 @service_tickets_bp.route("/<int:service_ticket_id>", methods=['PUT'])

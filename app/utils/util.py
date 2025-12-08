@@ -1,12 +1,11 @@
 # app/utils/util.py
+from flask import current_app
 from datetime import datetime, timedelta, timezone
 from jose import jwt
 from functools import wraps
 from flask import request, jsonify
 import os
 
-
-SECRET_KEY = os.getenv('SECRET_KEY')
 
 # encode_token function that takes in a mechanic_id or customer_id to create a token specific to that user
 def encode_token(user_id, user_type):
@@ -17,8 +16,12 @@ def encode_token(user_id, user_type):
         'type': user_type
     }
     
+    # fetch secret from the Flask app config
+    secret_key = current_app.config.get('SECRET_KEY', 'fallback-secret')
+    
+    
     # this encrypes the token and then returns it
-    token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
+    token = jwt.encode(payload, secret_key, algorithm='HS256')
     return token
 
 def token_required(required_type=None):
@@ -35,7 +38,12 @@ def token_required(required_type=None):
                     return jsonify({'message': 'Missing token'}), 400
             
                 try:
-                    data = jwt.decode(token, SECRET_KEY, algorithms='HS256')
+                    from flask import current_app
+                    from jose.exceptions import JWTError, ExpiredSignatureError
+                    
+                    secret_key = current_app.config.get('SECRET_KEY', 'fallback-secret')
+                    data = jwt.decode(token, secret_key, algorithms=['HS256'])
+
                     user_id = data['sub']
                     user_type = data.get('type')
                     

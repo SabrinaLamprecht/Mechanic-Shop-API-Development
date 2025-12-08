@@ -41,6 +41,7 @@ def create_mechanic():
         mechanic_data = mechanic_schema.load(request.json)
         
     except ValidationError as e:
+        print("Validation errors:", e.messages)
         return jsonify(e.messages), 400
     
     query = select(Mechanic).where(Mechanic.email == mechanic_data['email'])
@@ -83,12 +84,11 @@ def get_mechanic(mechanic_id):
     return jsonify({"error": "Mechanic not found"}), 404
 
 # Update a specific mechanic  ⚡ Tested!
-@mechanics_bp.route("/<int:mechanic_id>", methods=['PUT'])
+@mechanics_bp.route("/", methods=['PUT'])
 @token_required(required_type='mechanic')
-# Rate limit applied
 @limiter.limit('5 per day')
-def update_mechanic(user_id, user_type, mechanic_id):
-    mechanic = db.session.get(Mechanic, mechanic_id)
+def update_mechanic(user_id, user_type):
+    mechanic = db.session.get(Mechanic, user_id)
     
     if not mechanic: 
         return jsonify({"error": "Mechanic not found."}), 404
@@ -105,19 +105,23 @@ def update_mechanic(user_id, user_type, mechanic_id):
     return mechanic_schema.jsonify(mechanic), 200
     
 # Delete a specific mechanic ⚡ Tested!
-@mechanics_bp.route("/<int:mechanic_id>", methods=['DELETE'])
+@mechanics_bp.route("/", methods=['DELETE'])
 @token_required(required_type='mechanic') 
-# Rate limit applied
 @limiter.limit('5 per day')
-def delete_mechanic(user_id, user_type, mechanic_id):
-    mechanic = db.session.get(Mechanic, mechanic_id)
+def delete_mechanic(user_id, user_type):
+    # user_id comes from the JWT token
+    mechanic = db.session.get(Mechanic, int(user_id))
     
     if not mechanic:
         return jsonify({"error": "Mechanic not found."}), 404
     
     db.session.delete(mechanic)
     db.session.commit()
-    return jsonify({"message": f'Mechanic id: {mechanic_id}, successfully deleted.'}), 200
+    
+    return jsonify({
+        "message": f"Mechanic id: {user_id} successfully deleted.",
+        "status": "success"
+    }), 200
 
 # Add mechanic to service ticket ⚡ Tested!
 @mechanics_bp.route("/<int:mechanic_id>/add-ticket/<int:ticket_id>", methods=['POST'])

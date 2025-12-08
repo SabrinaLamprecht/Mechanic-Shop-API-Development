@@ -9,7 +9,6 @@ from . import inventory_bp
 from app.extensions import limiter, cache
 from app.utils.util import token_required
 
-       
 # Create an inventory item ⚡ Tested!
 @inventory_bp.route("/", methods=['POST'])
 # Rate limit applied
@@ -86,7 +85,7 @@ def update_inventory(user_id, user_type, inventory_id):
         setattr(inventory, key, value)
         
     db.session.commit()
-    return jsonify (inventory_update_schema.dump(inventory)), 200
+    return jsonify (inventory_update_schema.dump(inventory)), 201
 
 # Delete a specific inventory  ⚡ Tested!
 @inventory_bp.route("/<int:inventory_id>", methods=["DELETE"])

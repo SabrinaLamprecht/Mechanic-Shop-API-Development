@@ -15,8 +15,15 @@
 │	│		├──__init__.py 
 │	│		├── routes.py  
 │	│		└── schemas.py
+│   ├── /static  
+│   │ 	    └── swagger.yaml  
 │   ├── /utils 
 │	│		└── util.py # File for token functions
 │   └── models.py
 ├── app.py
+├── tests
+│   ├── /test_customers.py
+│   ├── /test_inventory.py
+│   ├── /test_mechanics-py
+│   ├── /test_service_tickets.py
 └── config.py

@@ -14,9 +14,11 @@ class DevelopmentConfig:
     RATELIMIT_DEFAULT = '200 per day;50 per hour'
 
 class TestingConfig:
+    DEBUG = True
     TESTING = True
     SECRET_KEY = os.getenv('SECRET_KEY', 'fallback-secret')
     SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', 'sqlite:///fallback_test.db')
+    CACHE_TYPE = 'SimpleCache'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 class ProductionConfig:
