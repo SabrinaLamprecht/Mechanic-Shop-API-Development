@@ -10,11 +10,11 @@ info:
   version: "1.0.0" # The version of your API
 
 # The base URL of the API, in this case, "127.0.0.1:5000". This is where the API can be accessed.
-host: "127.0.0.1:5000"
+host: "mechanic-shop-api-development-2-0.onrender.com"
 
 # The transfer protocol used by the API, in this case, "http".
 schemes:
-  - "http"
+  - "https"
 
 # The types of request body formats the API can consume. Here, it's "application/json",
 # meaning the API can accept JSON-formatted request bodies.
