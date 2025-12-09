@@ -8,9 +8,9 @@ app = create_app('ProductionConfig')
 # Redirect to documentation
 @app.route('/', methods=['GET'])
 def index():
-    return redirect('/api/docs')
+    return redirect('/api/docs/')
 
 if __name__ == "__main__":
     with app.app_context():
-        db.create_all()  # Ensure tables exist
+        db.create_all()  
 

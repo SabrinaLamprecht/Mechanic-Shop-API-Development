@@ -5,11 +5,11 @@
 # The job consists of several steps, including checking out the code, setting up Python,
 # creating a virtual environment, installing dependencies, and printing debugging information.
 
-name: Mechanic CI
+name: Flask CI/CD
 
 on:
   push:
-    branches: [main, master]
+    branches: [main]
 
 jobs:
   build:
