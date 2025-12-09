@@ -99,32 +99,6 @@ paths:
           schema:
             $ref: "#/definitions/AllCustomers"
 
-  /customers/{customer_id}: # ⚡ Tested!
-    get:
-      tags:
-        - Customers
-      summary: "Get a specific customer by ID"
-      description: "Retrieve a specific customer's details using their unique customer ID."
-      parameters:
-        - name: customer_id
-          in: path
-          required: true
-          description: "ID of the customer to retrieve"
-          type: integer
-      responses:
-        200:
-          description: "Customer retrieved successfully"
-          schema:
-            $ref: "#/definitions/CreateCustomerResponse"
-          examples:
-            application/json:
-              id: 1
-              name: "Puka Roo"
-              email: "pukaroo@example.com"
-              phone: "123-456-7890"
-        404:
-          description: "Customer not found"
-
     put: # ⚡ Tested!
       tags:
         - Customers
@@ -168,6 +142,32 @@ paths:
             application/json:
               message: "Customer <customer_id> deleted successfully."
               status: "success"
+
+  /customers/{customer_id}: # ⚡ Tested!
+    get:
+      tags:
+        - Customers
+      summary: "Get a specific customer by ID"
+      description: "Retrieve a specific customer's details using their unique customer ID."
+      parameters:
+        - name: customer_id
+          in: path
+          required: true
+          description: "ID of the customer to retrieve"
+          type: integer
+      responses:
+        200:
+          description: "Customer retrieved successfully"
+          schema:
+            $ref: "#/definitions/CreateCustomerResponse"
+          examples:
+            application/json:
+              id: 1
+              name: "Puka Roo"
+              email: "pukaroo@example.com"
+              phone: "123-456-7890"
+        404:
+          description: "Customer not found"
 
   # Search for a customer based on email # ⚡ Tested!
   /customers/search:
@@ -790,8 +790,6 @@ definitions:
           type: "string"
         phone:
           type: "string"
-        password:
-          type: "string"
 
   UpdateCustomerPayload:
     type: "object"
@@ -845,8 +843,6 @@ definitions:
           type: "string"
         phone:
           type: "string"
-        password:
-          type: "string"
 
   # -------------------- Inventory Definitions --------------------
 
@@ -879,21 +875,21 @@ definitions:
           type: "integer"
 
   AllInventoryItems:
-  type: "array"
-  items:
-    type: "object"
-    properties:
-      id:
-        type: "integer"
-      part_name:
-        type: "string"
-      price:
-        type: "number"
-        format: "float"
-      service_ticket_inventory:
-        type: "array"
-        items:
+    type: "array"
+    items:
+      type: "object"
+      properties:
+        id:
           type: "integer"
+        part_name:
+          type: "string"
+        price:
+          type: "number"
+          format: "float"
+        service_ticket_inventory:
+          type: "array"
+          items:
+            type: "integer"
 
   UpdateInventoryPayload:
     type: "object"
@@ -1078,29 +1074,34 @@ definitions:
     type: "array"
     items:
       type: "object"
-      id:
-        type: "integer"
-      VIN:
-        type: "string"
-      service_date:
-        type: "string"
-        format: "date"
-      service_desc:
-        type: "string"
-      customer_id:
-        type: "integer"
-      mechanic_ids:
-        type: "array"
-        items:
+      properties:
+        id:
           type: "integer"
+        VIN:
+          type: "string"
+        service_date:
+          type: "string"
+          format: "date"
+        service_desc:
+          type: "string"
+        customer_id:
+          type: "integer"
+        mechanic_ids:
+          type: "array"
+          items:
+            type: "integer"
 
   UpdateTicketPayload:
     type: "object"
     properties:
       add_ids:
-        type: "integer"
+        type: "array"
+        items:
+          type: "integer"
       remove_ids:
-        type: "integer"
+        type: "array"
+        items:
+          type: "integer"
     required:
       - add_ids
       - remove_ids

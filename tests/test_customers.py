@@ -52,7 +52,6 @@ class TestCustomer(unittest.TestCase):
         }
         
         response = self.client.post('/customers/', json=payload)
-        self.assertRaises(ValidationError)
         self.assertEqual(response.status_code, 201)
         self.assertEqual(response.json['name'], payload['name'])
     
@@ -128,11 +127,11 @@ class TestCustomer(unittest.TestCase):
         self.assertIn('error', response_bad.json)
     
     # Search for a Customer Based on Email Test - ⚡ Tested!
-    def search_customer_by_email(self):
+    def test_search_customer_by_email(self):
         email_to_search = self.customer.email
         response = self.client.get(f'/customers/search?email={email_to_search}')
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.json, list)
+        self.assertIsInstance(response.json, list)
         self.assertGreaterEqual(len(response.json), 1)
         self.assertEqual(response.json[0]['email'], email_to_search)
         

@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout code # Make sure code doesn't have any import issues, red lines, etc.
         uses: actions/checkout@v2
 
       - name: Set up Python
